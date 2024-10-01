@@ -1,20 +1,16 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 
 #include "some_heap.h"
 
 #define KEY_NOT_PRESENT -1
 
 heap_t *heap_create(int capacity) {
-    heap_t *heapArray = malloc(capacity*sizeof(int));\
-    heapArray -> size = 0;
-    heapArray -> capacity = capacity;
+    heap_t heapArray =(*int)malloc(capacity*sizeof(int));
 }
 
 void heap_free(heap_t *heap) {
-    free(heap);
 }
 
 unsigned int heap_size(heap_t *heap) { return heap->size; }

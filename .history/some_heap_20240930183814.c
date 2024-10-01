@@ -1,20 +1,15 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 
 #include "some_heap.h"
 
 #define KEY_NOT_PRESENT -1
 
 heap_t *heap_create(int capacity) {
-    heap_t *heapArray = malloc(capacity*sizeof(int));\
-    heapArray -> size = 0;
-    heapArray -> capacity = capacity;
 }
 
 void heap_free(heap_t *heap) {
-    free(heap);
 }
 
 unsigned int heap_size(heap_t *heap) { return heap->size; }
@@ -53,14 +48,22 @@ void heap_bubble_up(heap_t *heap, int index) {
 }
 
 void heap_bubble_down(heap_t *heap, int index) {
+    int curr_heap_level = heap_level(index);
     int leftChild = heap_left_child(index);
     int rightChild = heap_right_child(index);
+    //int parent = heap_parent(index);
     heap_node_t current_root = heap->data[index];
     heap_node_t leftNode = heap->data[leftChild];
     heap_node_t rightNode = heap->data[rightChild];
 
     if (&current_root >= &leftNode) heap_swap(heap, index, leftChild);
     if (&current_root >= &rightNode) heap_swap(heap, index, rightChild);
+
+    // while(curr_heap_level != 0){
+    //     curr_heap_level--;
+    //     if (parent >= rightChild) heap_swap(heap, parent, rightChild);
+    //     if (parent >= leftChild) heap_swap(heap, parent, leftChild);
+    // }
 }
 
 void heap_insert(heap_t *heap, heap_key_t key, heap_value_t data) {

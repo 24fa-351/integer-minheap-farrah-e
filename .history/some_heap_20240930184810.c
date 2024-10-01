@@ -1,7 +1,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 
 #include "some_heap.h"
 
@@ -14,7 +13,6 @@ heap_t *heap_create(int capacity) {
 }
 
 void heap_free(heap_t *heap) {
-    free(heap);
 }
 
 unsigned int heap_size(heap_t *heap) { return heap->size; }
