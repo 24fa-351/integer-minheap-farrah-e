@@ -21,7 +21,7 @@ void heap_free(heap_t *heap) {
 
 unsigned int heap_size(heap_t *heap) { return heap->size; }
 
-unsigned int heap_parent(unsigned int index) { return (index-1)/2; }
+unsigned int heap_parent(unsigned int index) { return (index-2)/2; }
 
 unsigned int heap_left_child(unsigned int index) { return (2*index)+1; }
 
@@ -49,11 +49,11 @@ void heap_bubble_up(heap_t *heap, int index) {
     //heap_node_t currentNode = heap-> data[index];
     //heap_node_t parentNode = heap->data[parent];
     while(index > 0){
-        if(heap->data[index].key < heap->data[parent].key){
+        if(&heap->data[curr_heap_level] < &heap->data[parent]){
         heap_swap(heap, index, parent);
         index = parent;
         parent = heap_parent(index);
-     } else break;
+     }
     }
 }
 
@@ -74,7 +74,7 @@ void heap_insert(heap_t *heap, heap_key_t key, heap_value_t data) {
     }
 
     heap->data[heap_size(heap)].key = key;
-    heap->data[heap_size(heap)].value = data;
+    heap->data[heap_size(heap)].value = data.as_int;
     heap->size++;
 
     heap_bubble_up(heap, heap_size(heap) - 1);

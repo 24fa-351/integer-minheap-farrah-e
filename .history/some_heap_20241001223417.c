@@ -8,11 +8,10 @@
 #define KEY_NOT_PRESENT -1
 
 heap_t *heap_create(int capacity) {
-    heap_t *heapArray = malloc(sizeof(int));
+    heap_t *heapArray = malloc(capacity*sizeof(int));\
     heapArray -> size = 0;
     heapArray -> capacity = capacity;
-    heap_node_t *data = malloc(capacity*sizeof(heap_node_t));
-    return heapArray;
+    heap_node_t *data = 0;
 }
 
 void heap_free(heap_t *heap) {
@@ -21,7 +20,7 @@ void heap_free(heap_t *heap) {
 
 unsigned int heap_size(heap_t *heap) { return heap->size; }
 
-unsigned int heap_parent(unsigned int index) { return (index-1)/2; }
+unsigned int heap_parent(unsigned int index) { return (index-2)/2; }
 
 unsigned int heap_left_child(unsigned int index) { return (2*index)+1; }
 
@@ -38,9 +37,9 @@ void heap_print(heap_t *heap) {
 }
 
 void heap_swap(heap_t *heap, int index1, int index2) { 
-    heap_node_t temp = heap->data[index1];
-    heap->data[index1] = heap->data[index2];
-    heap->data[index2] = temp;
+    heap_node_t temp = heap->data[index1].value;
+    heap->data[index1].value = heap->data[index2].value;
+    heap->data[index2].value = temp;
 }
 
 void heap_bubble_up(heap_t *heap, int index) {
@@ -49,11 +48,11 @@ void heap_bubble_up(heap_t *heap, int index) {
     //heap_node_t currentNode = heap-> data[index];
     //heap_node_t parentNode = heap->data[parent];
     while(index > 0){
-        if(heap->data[index].key < heap->data[parent].key){
+        if(heap->data[curr_heap_level].value < heap->data[parent].value){
         heap_swap(heap, index, parent);
         index = parent;
         parent = heap_parent(index);
-     } else break;
+     }
     }
 }
 
