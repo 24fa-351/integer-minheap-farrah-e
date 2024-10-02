@@ -15,6 +15,7 @@ unsigned long long rand_between(unsigned long long min,
     return min + (rand() % range);
 }
 void test_heap(void) {
+    FILE * output = fopen("output.cvs", "w");
     heap_t *heap = heap_create(200);
     for (heap_key_t ix = 0; ix < 20; ix++) {
         heap_key_t key = rand_between(0, 1000);

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <string.h>
 #include <time.h>
 
 #include "some_heap.h"
@@ -15,6 +16,7 @@ unsigned long long rand_between(unsigned long long min,
     return min + (rand() % range);
 }
 void test_heap(void) {
+    FILE *Output = fopen("output.txt", "w");
     heap_t *heap = heap_create(200);
     for (heap_key_t ix = 0; ix < 20; ix++) {
         heap_key_t key = rand_between(0, 1000);

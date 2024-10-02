@@ -48,10 +48,7 @@ void heap_bubble_up(heap_t *heap, int index) {
         int parent = heap_parent(index);
         heap_key_t parentNode = heap->data[parent].key;
         heap_key_t currentNode = heap-> data[index].key;
-        if(currentNode < parentNode){
-            heap_swap(heap, index, parent);
-            index = parent;
-        }
+        if(currentNode < parentNode) heap_swap(heap, index, parent);
         else break;
     }
 }

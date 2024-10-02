@@ -44,15 +44,17 @@ void heap_swap(heap_t *heap, int index1, int index2) {
 }
 
 void heap_bubble_up(heap_t *heap, int index) {
+    int curr_heap_level = heap_level(index);
+    int parent = heap_parent(index);
+    //heap_node_t currentNode = heap-> data[index];
+    //heap_node_t parentNode = heap->data[parent];
     while(index>0){
-        int parent = heap_parent(index);
-        heap_key_t parentNode = heap->data[parent].key;
-        heap_key_t currentNode = heap-> data[index].key;
-        if(currentNode < parentNode){
-            heap_swap(heap, index, parent);
-            index = parent;
-        }
-        else break;
+        if(heap->data[index].key < heap->data[parent].key){
+        heap_swap(heap, index, parent);
+        curr_heap_level--;
+        index = parent;
+        parent = heap_parent(index);
+     } else break;
     }
 }
 
@@ -97,4 +99,3 @@ heap_value_t heap_remove_min(heap_t *heap) {
 
     return min;
 }
-

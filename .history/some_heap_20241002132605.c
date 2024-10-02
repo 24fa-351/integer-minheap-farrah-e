@@ -30,8 +30,9 @@ unsigned int heap_right_child(unsigned int index) { return (2*index)+2; }
 unsigned int heap_level(unsigned int index) { return log2(index+1); }
 
 void heap_print(heap_t *heap) {
+    FILE * output = ("output.txt", "w");
     for (int ix = 0; ix < heap_size(heap); ix++) {
-        printf("%3d - %3d : " HEAP_KEY_FORMAT "\n", heap_level(ix), ix,
+        printf(output, "%3d - %3d : " HEAP_KEY_FORMAT "\n", heap_level(ix), ix,
                heap->data[ix].key);
     }
     printf("\n");
@@ -44,15 +45,14 @@ void heap_swap(heap_t *heap, int index1, int index2) {
 }
 
 void heap_bubble_up(heap_t *heap, int index) {
+    //heap_node_t currentNode = heap-> data[index].key;
+    //heap_node_t parentNode = heap->data[parent].key;
     while(index>0){
         int parent = heap_parent(index);
-        heap_key_t parentNode = heap->data[parent].key;
-        heap_key_t currentNode = heap-> data[index].key;
-        if(currentNode < parentNode){
+        if(heap->data[index].key < heap->data[parent].key){
             heap_swap(heap, index, parent);
             index = parent;
-        }
-        else break;
+        } else break;
     }
 }
 
@@ -97,4 +97,3 @@ heap_value_t heap_remove_min(heap_t *heap) {
 
     return min;
 }
-
