@@ -24,7 +24,7 @@ void test_heap(void) {
     }
     for (int ix = 0; ix < 10; ix++) {
         heap_value_t key = (heap_value_t)heap_remove_min(heap);
-        printf("Removed %llu\n", key.as_int);
+        printf("Removed %p\n", key);
         heap_print(heap);
     }
     exit(0);
